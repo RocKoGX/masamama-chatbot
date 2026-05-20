@@ -1,0 +1,11 @@
+fecha,local,cliente,producto,categoria,cantidad,total,vendedor
+2026-01-05,Cercado,Juan,Pan de masa madre,Panaderia,2,24,Sofia
+2026-01-06,Yanahuara,Ana,Cafe americano,Cafeteria,3,27,Diego
+2026-01-07,Cercado,Lucia,Croissant artesanal,Pasteleria,4,40,Sofia
+2026-01-10,Yanahuara,Carlos,Pan integral,Panaderia,1,15,Maria
+2026-02-02,Cercado,Elena,Latte,Cafeteria,2,24,Diego
+2026-02-05,Yanahuara,Juan,Focaccia artesanal,Panaderia,3,45,Maria
+2026-02-08,Cercado,Ana,Brownie artesanal,Pasteleria,2,20,Sofia
+2026-03-01,Yanahuara,Lucia,Cappuccino,Cafeteria,4,36,Diego
+2026-03-03,Cercado,Carlos,Pan multigrano,Panaderia,2,30,Sofia
+2026-03-06,Yanahuara,Elena,Roll de canela,Pasteleria,3,33,Maria
