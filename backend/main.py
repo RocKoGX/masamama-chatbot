@@ -2,17 +2,20 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
-from openai import OpenAI
+from openai import OpenAI, RateLimitError, AuthenticationError, APIConnectionError
 from pathlib import Path
+from dotenv import load_dotenv
 import os
+load_dotenv()
 
 app = FastAPI()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY", "TU_API_KEY"))
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5173",
+                   "http://127.0.0.1:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -54,32 +57,87 @@ Ventas por categoría:
 def inicio():
     return {"mensaje": "Backend de Masamama funcionando"}
 
+#Chatbot
+from productos import productos
 @app.post("/chat")
 def chat(data: Pregunta):
-    resumen = generar_resumen()
 
-    respuesta = client.chat.completions.create(
-        model="gpt-5",
-        messages=[
-            {
-                "role": "system",
-                "content": "Eres un analista de ventas para Masamama, una panadería y cafetería artesanal."
-            },
-            {
-                "role": "user",
-                "content": f"""
-Resumen de ventas:
-{resumen}
+    catalogo = "\n".join([
+        f"""
+ID: {p['id']}
+Nombre: {p['nombre']}
+Categoría: {p['categoria']}
+Precio: {p['precio']}
+Descripción: {p['descripcion']}
+"""
+        for p in productos
+    ])
 
-Pregunta:
+    try:
+
+        respuesta = client.chat.completions.create(
+            model="gpt-5-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": """
+Eres un asistente virtual de Masamama.
+
+Tu trabajo es recomendar productos
+de panadería, cafetería y pastelería.
+
+REGLAS:
+- SOLO puedes recomendar productos del catálogo.
+- NO inventes productos.
+- Recomienda según precio y categoría.
+- Si el usuario dice "barato", prioriza menor precio.
+- Sé breve y amigable.
+"""
+                },
+                {
+                    "role": "user",
+                    "content": f"""
+Catálogo disponible:
+
+{catalogo}
+
+Usuario:
 {data.pregunta}
 
-Responde de forma clara, breve y útil para el negocio.
+Responde recomendando productos reales.
 """
-            }
-        ]
-    )
+                }
+            ]
+        )
 
-    return {
-        "respuesta": respuesta.choices[0].message.content
-    }
+        return {
+            "respuesta":
+            respuesta.choices[0].message.content
+        }
+
+    except RateLimitError:
+        return {
+            "respuesta":
+            "El asistente está temporalmente sin crédito disponible. Intenta más tarde."
+        }
+
+    except AuthenticationError:
+        return {
+            "respuesta":
+            "La API key de OpenAI es inválida o expiró."
+        }
+
+    except APIConnectionError:
+        return {
+            "respuesta":
+            "No pude conectarme al servicio de IA. Revisa tu conexión."
+        }
+
+    except Exception as e:
+
+        print("ERROR CHATBOT:", e)
+
+        return {
+            "respuesta":
+            "Ocurrió un error inesperado en el chatbot."
+        }

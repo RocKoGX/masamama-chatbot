@@ -64,20 +64,32 @@ async function enviarPregunta() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ pregunta: textoUsuario })
     })
-
-    const data = await res.json()
-
+    console.log('Status', res.status)
+    const text = await res.text()
+    console.log('Response text:', text)
+    let data = {}
+    try{
+      data = JSON.parse(text)
+    } catch (e) {
+      throw new Error("El backend no devolvió un JSON válido: " + text);
+    }
     mensajes.value.push({
       tipo: 'bot',
-      texto: data.respuesta
+      texto: data.respuesta || 'El chatbot no respondió.'
     })
   } catch (error) {
+    console.error(
+      'Error frontend', error
+    )
+
     mensajes.value.push({
       tipo: 'bot',
-      texto: 'No pude conectarme con el backend. Verifica que FastAPI esté ejecutándose.'
-    })
+      texto: 'No pude conectarme con el backend. Verifica que FastAPI esté ejecutándose.'+error.message
+  });
+      
+    }
   }
-}
+
 </script>
 
 <style scoped>
