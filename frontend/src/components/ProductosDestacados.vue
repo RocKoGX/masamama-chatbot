@@ -31,6 +31,7 @@ defineEmits(['agregar'])
 h2 {
   font-size: 34px;
   text-align: center;
+  margin: 45px;
 }
 
 .subtitulo {
@@ -42,13 +43,17 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 24px;
+  margin: 10px;
 }
 
 .card {
-  background: white;
-  border-radius: 16px;
+  background: -webkit-gradient(linear, right bottom, left top, from(#f3f3f3), to(#fff));
+  border-radius: 10px;
   padding: 16px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  border: solid 1px #e4e4e4;
+  display: flex;
+  flex-direction: column;
 }
 
 img {
@@ -60,11 +65,21 @@ img {
 
 button {
   width: 100%;
-  margin-top: 12px;
-  padding: 10px;
+  margin-top: auto;
+  padding: 8px;
   border: none;
-  background: #6b3f22;
+  background: linear-gradient(#855536, #6b3f22, #402412);
+  box-shadow: inset 0 0 1px 2px rgb(94 62 33 / 59%);
   color: white;
   border-radius: 8px;
+  
+}
+
+strong {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #be1111;
+  font-weight: bold;
 }
 </style>

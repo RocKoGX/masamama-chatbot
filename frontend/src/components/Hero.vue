@@ -2,6 +2,7 @@
   <section class="hero">
     <div class="hero-texto">
       <h1>Panadería y cafetería artesanal Masamama</h1>
+
       <p>
         Productos elaborados con masa madre, fermentación lenta,
         trigo molido en piedra e insumos locales.
@@ -26,6 +27,10 @@
   display: flex;
   align-items: center;
   padding: 60px 8%;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .hero-texto {
@@ -34,6 +39,7 @@
 
 h1 {
   font-size: 48px;
+  line-height: 1;
 }
 
 p {
@@ -44,11 +50,12 @@ p {
 a {
   display: inline-block;
   margin-top: 20px;
-  background: #d6a15d;
+  background: linear-gradient(#f3c78e, #a58051, #a58051);
   color: #3b2415;
   padding: 12px 22px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
+  box-shadow: inset 0 0 1px 2px rgb(149 108 48 / 59%), inset 0 -0.1em 0.1em #9a9a9a, 0 0 5px 4px rgb(19 19 19 / 30%);
 }
 </style>

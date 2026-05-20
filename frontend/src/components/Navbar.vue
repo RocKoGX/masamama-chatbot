@@ -25,7 +25,8 @@ defineProps({
   position: sticky;
   top: 0;
   z-index: 20;
-  background: #6b3f22;
+  background: linear-gradient(#875a3d, #70462b 50%, #6b3f22 50%, #402614);
+  /*background: linear-gradient(#2c2c2c, #1a1a1a 50%, #1c1c1c 50%, #0a0a0a);*/
   color: white;
   padding: 18px 8%;
   display: flex;

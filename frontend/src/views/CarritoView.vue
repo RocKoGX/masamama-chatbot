@@ -57,8 +57,11 @@ function finalizarCompra() {
   min-height: 70vh;
 }
 
+h1 {
+  color: rgb(181 120 66) !important;
+}
+
 .item {
-  background: white;
   padding: 16px;
   margin-bottom: 14px;
   border-radius: 14px;
@@ -66,6 +69,11 @@ function finalizarCompra() {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  background: -webkit-gradient(linear, right bottom, left top, from(#f3f3f3), to(#fff));
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  border: solid 1px #e4e4e4;
 }
 
 img {
@@ -79,7 +87,8 @@ button {
   margin: 5px;
   padding: 9px 13px;
   border: none;
-  background: #6b3f22;
+  background: linear-gradient(#855536, #6b3f22, #402412);
+  box-shadow: inset 0 0 1px 2px rgb(94 62 33 / 59%);
   color: white;
   border-radius: 8px;
 }

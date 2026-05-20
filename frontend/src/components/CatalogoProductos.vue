@@ -60,6 +60,7 @@ const productosFiltrados = computed(() => {
 h2 {
   text-align: center;
   font-size: 34px;
+  margin: 45px;
 }
 
 .filtros {
@@ -71,21 +72,25 @@ h2 {
   margin: 6px;
   padding: 10px 16px;
   border: none;
-  background: #d6a15d;
+  background: linear-gradient(to bottom, #e1b884, #bd935e 50%, #b98b50 50%, #745732);
   border-radius: 20px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 24px;
+  margin: 10px;
 }
 
 .card {
-  background: white;
-  border-radius: 16px;
+  background: -webkit-gradient(linear, right bottom, left top, from(#f3f3f3), to(#fff));
+  border-radius: 10px;
   padding: 16px;
   box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  border: solid 1px #e4e4e4;
+  display: flex;
+  flex-direction: column;
 }
 
 img {
@@ -102,13 +107,26 @@ span {
   font-weight: bold;
 }
 
+.card strong {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #be1111;
+  font-weight: bold;
+}
+
 .card button {
   width: 100%;
-  margin-top: 12px;
-  padding: 10px;
+  margin-top: auto;
+  padding: 8px;
   border: none;
-  background: #6b3f22;
+  background: linear-gradient(#855536, #6b3f22, #402412);
+
   color: white;
   border-radius: 8px;
+}
+
+.card p {
+  min-height: 55px;
 }
 </style>
